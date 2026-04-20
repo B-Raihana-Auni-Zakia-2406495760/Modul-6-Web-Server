@@ -14,3 +14,6 @@ Pada tahap ini terlihat keterbatasan server single-threaded. Saat rute /sleep di
 
 # Commit 5 Reflection notes
 Server ditingkatkan menjadi multithreaded dengan ThreadPool berisi 4 worker agar lebih efisien. Pekerjaan dibagikan lewat channel (mpsc), dengan bantuan Arc dan Mutex untuk akses bersama yang aman. Hasilnya, request lambat tidak lagi memblokir seluruh server.
+
+# Commit Bonus Reflection notes
+Fungsi inisialisasi diubah dari new ke build agar lebih aman. Sekarang build mengembalikan Result, sehingga jika ukuran pool tidak valid (0), akan menghasilkan PoolCreationError tanpa panic!. Ini mencegah program berhenti tiba-tiba dan sesuai best practice Rust.
