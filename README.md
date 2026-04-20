@@ -8,3 +8,6 @@ Pada tahap ini, web server sudah bisa mengirim file HTML, bukan hanya mencetak r
 ![Commit 3 screen capture](/assets/images/commit3.png)
 # Commit 3 Reflection notes
 Server sekarang bisa memvalidasi request line dan memberi respons berbeda. Jika GET /, server mengembalikan hello.html dengan 200 OK. Jika path tidak dikenali (misalnya /bad), server mengirim 404 NOT FOUND dengan halaman bad.html.
+
+# Commit 4 Reflection notes
+Pada tahap ini terlihat keterbatasan server single-threaded. Saat rute /sleep dijalankan (delay 10 detik), server menjadi terblokir dan tidak bisa melayani request lain. Ini menunjukkan bahwa arsitektur ini tidak scalable dan perlu konkurensi agar request lambat tidak menghambat yang lain.
