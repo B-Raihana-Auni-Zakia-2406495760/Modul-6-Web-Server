@@ -7,7 +7,10 @@ Pada tahap ini, web server sudah bisa mengirim file HTML, bukan hanya mencetak r
 
 ![Commit 3 screen capture](/assets/images/commit3.png)
 # Commit 3 Reflection notes
-Server sekarang bisa memvalidasi request line dan memberi respons berbeda. Jika GET /, server mengembalikan hello.html dengan 200 OK. Jika path tidak dikenali (misalnya /bad), server mengirim 404 NOT FOUND dengan halaman bad.html.
+Server sekarang bisa memvalidasi request line dan memberi respons berbeda. Jika GET /, server mengembalikan hello.html dengan 200 OK. Jika path tidak dikenali (misalnya /bad), server mengirim 404 NOT FOUND dengan halaman 404.html.
 
 # Commit 4 Reflection notes
 Pada tahap ini terlihat keterbatasan server single-threaded. Saat rute /sleep dijalankan (delay 10 detik), server menjadi terblokir dan tidak bisa melayani request lain. Ini menunjukkan bahwa arsitektur ini tidak scalable dan perlu konkurensi agar request lambat tidak menghambat yang lain.
+
+# Commit 5 Reflection notes
+Server ditingkatkan menjadi multithreaded dengan ThreadPool berisi 4 worker agar lebih efisien. Pekerjaan dibagikan lewat channel (mpsc), dengan bantuan Arc dan Mutex untuk akses bersama yang aman. Hasilnya, request lambat tidak lagi memblokir seluruh server.
